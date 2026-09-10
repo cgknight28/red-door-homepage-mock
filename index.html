@@ -151,18 +151,18 @@
     }
 
     .nav-inner {
-      min-height: 78px;
+      min-height: 74px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 18px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      min-width: 232px;
+      gap: 13px;
+      min-width: 252px;
       flex: 0 0 auto;
     }
 
@@ -175,6 +175,39 @@
       background: var(--red);
       border-radius: 4px;
       box-shadow: 0 9px 18px rgba(188, 23, 25, .28);
+    }
+
+    .site-header .brand-mark.has-logo {
+      width: 46px;
+      height: 58px;
+      padding: 6px 9px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .96);
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 8px;
+      box-shadow:
+        0 12px 24px rgba(188, 23, 25, .28),
+        0 0 0 1px rgba(188, 23, 25, .18);
+    }
+
+    .site-header.is-scrolled .brand-mark.has-logo,
+    .site-header.is-open .brand-mark.has-logo {
+      border-color: rgba(188, 23, 25, .16);
+      box-shadow:
+        0 10px 20px rgba(23, 23, 23, .08),
+        0 0 0 1px rgba(188, 23, 25, .14);
+    }
+
+    .brand-mark.has-logo::before,
+    .brand-mark.has-logo::after {
+      display: none;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .brand-mark::before {
@@ -222,9 +255,20 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 17px;
+      gap: 4px;
+      padding: 6px;
       font-size: .88rem;
       font-weight: 800;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
+
+    .site-header.is-scrolled .nav-menu,
+    .site-header.is-open .nav-menu {
+      background: #f8f8f9;
+      border-color: var(--line);
     }
 
     .nav-item {
@@ -240,13 +284,15 @@
       color: currentColor;
       background: transparent;
       border: 0;
-      padding: 0;
+      border-radius: 999px;
+      padding: 0 10px;
       white-space: nowrap;
     }
 
     .nav-menu a:hover,
     .nav-menu button:hover {
       color: #ffcdcd;
+      background: rgba(255, 255, 255, .08);
     }
 
     .site-header.is-scrolled .nav-menu a:hover,
@@ -254,6 +300,23 @@
     .site-header.is-open .nav-menu a:hover,
     .site-header.is-open .nav-menu button:hover {
       color: var(--red);
+      background: #fff;
+    }
+
+    .nav-menu .nav-cta {
+      min-height: 38px;
+      padding: 0 15px;
+      color: var(--white);
+      background: var(--red);
+      box-shadow: 0 10px 20px rgba(188, 23, 25, .24);
+    }
+
+    .nav-menu .nav-cta:hover,
+    .nav-menu .nav-cta:focus-visible,
+    .site-header.is-scrolled .nav-menu .nav-cta:hover,
+    .site-header.is-open .nav-menu .nav-cta:hover {
+      color: var(--white);
+      background: var(--red-dark);
     }
 
     .dropdown-toggle::after {
@@ -969,7 +1032,12 @@
 
     .google-reviews {
       overflow: hidden;
+      padding-bottom: clamp(30px, 4vw, 48px);
       background: var(--white);
+    }
+
+    #areas-served {
+      padding-top: clamp(30px, 4vw, 48px);
     }
 
     .reviews-shell {
@@ -1472,204 +1540,192 @@
       font-weight: 400;
     }
 
-    .areas-visual {
+    .areas-visual,
+    .areas-copy {
       display: grid;
-      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-      gap: clamp(28px, 5vw, 54px);
-      align-items: center;
+      gap: 0;
     }
 
-    .market-coverage-card {
-      min-height: 540px;
+    .areas-copy > .section-kicker {
+      justify-self: center;
+      margin-bottom: 10px;
+    }
+
+    .areas-copy > h2 {
+      max-width: 1080px;
+      margin: 0 auto 12px;
+      text-align: center;
+    }
+
+    .areas-copy > h2 span {
+      display: block;
+    }
+
+    .areas-copy > .lead {
+      max-width: 1080px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+
+    .county-grid {
       display: grid;
-      align-content: space-between;
-      gap: 24px;
-      padding: clamp(24px, 4vw, 34px);
-      color: var(--white);
-      background:
-        linear-gradient(145deg, rgba(30, 35, 42, .97), rgba(15, 17, 21, .98)),
-        #171717;
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
 
-    .coverage-eyebrow {
-      color: #ffced0;
-      font-size: .76rem;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .coverage-city-name {
-      margin: 10px 0 8px;
-      color: var(--white);
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      line-height: .96;
-      letter-spacing: 0;
-    }
-
-    .coverage-region {
-      color: #f4b7b9;
-      font-weight: 900;
-    }
-
-    .coverage-insight {
-      max-width: 35rem;
-      color: rgba(255, 255, 255, .8);
-      font-size: 1.04rem;
-      line-height: 1.55;
-    }
-
-    .coverage-guidance {
+    .county-card {
+      position: relative;
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       gap: 14px;
+      align-content: start;
+      min-height: 0;
+      padding: 20px 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(250, 251, 252, .98)),
+        var(--white);
+      border: 1px solid #e7e9ee;
+      border-radius: 8px;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, .92) inset,
+        0 18px 38px rgba(23, 23, 23, .075),
+        0 4px 12px rgba(23, 23, 23, .045);
     }
 
-    .coverage-guidance-item {
-      display: grid;
-      gap: 6px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, .14);
+    .county-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 -18px 28px rgba(23, 23, 23, .025);
     }
 
-    .coverage-guidance-item span,
-    .coverage-questions h4 {
+    .county-card > div {
+      grid-column: 1 / -1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .county-card > .city-list {
+      grid-column: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .county-card h3 {
       margin: 0;
-      color: #ffced0;
-      font-size: .72rem;
-      font-weight: 900;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+      color: var(--ink);
+      font-size: clamp(1.1rem, 2vw, 1.32rem);
+      line-height: 1.1;
     }
 
-    .coverage-guidance-item p {
-      margin: 0;
-      color: rgba(255, 255, 255, .84);
-      font-size: .98rem;
-      line-height: 1.45;
+    .county-card p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 750;
+      line-height: 1.35;
     }
 
-    .coverage-questions {
+    .county-card.is-wide {
+      grid-column: 1 / -1;
+    }
+
+    .county-card.is-wide .city-list {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px 24px;
+    }
+
+    .city-list {
       display: grid;
-      gap: 12px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, .14);
-    }
-
-    .coverage-question-list {
-      display: grid;
-      gap: 9px;
+      gap: 7px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
-    .coverage-question-list li {
-      position: relative;
-      padding-left: 18px;
-      color: rgba(255, 255, 255, .78);
-      font-size: .92rem;
-      line-height: 1.4;
-    }
-
-    .coverage-question-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .62em;
-      width: 7px;
-      height: 7px;
-      background: #c8102e;
-      border-radius: 50%;
-    }
-
-    .area-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
     .area-link {
-      min-height: 76px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 16px;
-      color: var(--charcoal);
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      font-weight: 900;
-      transition: border-color .18s ease, color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+      display: inline;
+      color: var(--red);
+      font-size: .9rem;
+      font-weight: 700;
+      line-height: 1.35;
+      text-decoration: none;
+      transition: color .18s ease, text-decoration-color .18s ease;
     }
 
     .area-link:hover,
-    .area-link:focus-visible,
-    .area-link.is-active {
-      color: var(--red);
-      background: #fff7f7;
-      border-color: rgba(188, 23, 25, .28);
-      box-shadow: 0 12px 26px rgba(23, 23, 23, .08);
-      transform: translateY(-2px);
-    }
-
-    .area-link span {
-      display: block;
-    }
-
-    .area-link small {
-      display: block;
-      margin-top: 5px;
-      color: #747981;
-      font-size: .72rem;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .area-link em {
-      color: var(--red);
-      font-size: .72rem;
-      font-style: normal;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .area-link::after {
-      content: none;
-    }
-
-    .townships .area-link {
-      min-height: 54px;
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 14px;
-    }
-
-    .townships .area-link::after {
-      content: "View";
-      color: var(--red);
-      font-size: .72rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+    .area-link:focus-visible {
+      color: var(--red-dark);
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+      text-underline-offset: 4px;
     }
 
     .townships {
-      margin-top: 16px;
+      overflow: hidden;
       padding: 20px;
       background: #fbfbfc;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 8px;
     }
 
-    .townships h3 {
-      margin: 0 0 12px;
-      font-size: 1rem;
+    .townships summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      color: var(--charcoal);
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .townships summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .townships summary strong,
+    .townships summary small {
+      display: block;
+    }
+
+    .townships summary strong {
+      color: var(--ink);
+      font-size: 1.04rem;
+      font-weight: 900;
+    }
+
+    .townships summary small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .townships summary::after {
+      content: "+";
+      flex: 0 0 auto;
+      color: var(--red);
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .townships[open] summary::after {
+      content: "-";
+    }
+
+    .township-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px 18px;
+      margin-top: 18px;
+    }
+
+    .townships .area-link {
+      box-shadow: none;
     }
 
     .library-grid,
@@ -1970,6 +2026,11 @@
         color: var(--ink);
         background: var(--white);
         border-top: 1px solid var(--line);
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+        box-shadow: none;
+        backdrop-filter: none;
         font-size: 1rem;
       }
 
@@ -2011,6 +2072,13 @@
         min-height: 42px;
       }
 
+      .nav-menu .nav-cta {
+        justify-content: center;
+        min-height: 52px;
+        margin-top: 10px;
+        color: var(--white);
+      }
+
       .hero {
         min-height: 760px;
         background-position: 68% center;
@@ -2023,7 +2091,6 @@
       .proof-panel,
       .split,
       .analysis-grid,
-      .areas-visual,
       .footer-grid {
         grid-template-columns: 1fr;
       }
@@ -2044,6 +2111,14 @@
       .guarantee-grid,
       .library-grid {
         grid-template-columns: 1fr;
+      }
+
+      .county-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .county-card.is-wide .city-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .reviews-grid {
@@ -2076,6 +2151,12 @@
       .brand-mark {
         width: 42px;
         height: 42px;
+      }
+
+      .site-header .brand-mark.has-logo {
+        width: 40px;
+        height: 50px;
+        padding: 5px 8px;
       }
 
       .hero {
@@ -2160,26 +2241,24 @@
         transform: translateY(-28px);
       }
 
-      .image-frame,
-      .market-coverage-card {
+      .image-frame {
         min-height: 360px;
       }
 
-      .coverage-guidance-item p,
-      .coverage-question-list li {
-        font-size: .88rem;
-      }
-
-      .area-grid {
+      .county-grid {
         grid-template-columns: 1fr;
       }
 
-      .area-link {
-        min-height: 66px;
+      .field-grid,
+      .county-grid {
+        grid-template-columns: 1fr;
       }
 
-      .field-grid,
-      .area-grid {
+      .township-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .county-card.is-wide .city-list {
         grid-template-columns: 1fr;
       }
 
@@ -2234,7 +2313,9 @@
     </div>
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Red Door Property Management home">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-mark has-logo" aria-hidden="true">
+          <img class="brand-logo" src="assets/red-door-logo-mark.png" alt="">
+        </span>
         <span class="brand-text">
           <span>Red Door</span>
           <span>Property Management</span>
@@ -2261,7 +2342,6 @@
           </div>
         </div>
         <a href="/pricing">Pricing</a>
-        <a href="/airbnb-management">Short-Term Rentals</a>
         <div class="nav-item" data-nav-item>
           <button class="dropdown-toggle" type="button" aria-expanded="false" data-dropdown-toggle>For Tenants</button>
           <div class="dropdown">
@@ -2273,8 +2353,8 @@
           </div>
         </div>
         <a href="/about">About Us</a>
-        <a href="/contact">Contact</a>
         <a href="/blog">Watch &amp; Learn</a>
+        <a class="nav-cta" href="/contact">Free Rental Analysis</a>
       </nav>
     </div>
   </header>
@@ -2287,7 +2367,7 @@
           <span>Hands-Off Property Management</span>
         </h1>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#rental-analysis" data-track="hero-rental-analysis">Get a Free Rental Analysis</a>
+          <a class="btn btn-primary" href="/contact" data-track="hero-request-analysis">Request a Rental Analysis</a>
           <a class="btn btn-secondary" href="https://calendly.com/cknight-19/phone-call" target="_blank" rel="noopener" data-track="hero-schedule-call">Schedule a Call</a>
         </div>
       </div>
@@ -2505,170 +2585,146 @@
       </div>
     </section>
 
-    <section class="section-soft" id="rental-analysis">
-      <div class="container analysis-grid">
-        <div class="reveal">
-          <div class="section-kicker">Free Rental Analysis</div>
-          <h2>What Could Your Indianapolis Rental Earn?</h2>
-          <p class="lead">Get a professional rental analysis backed by local market activity, comparable homes, current competition, and Red Door's experience managing rentals across the Indianapolis area.</p>
-          <ul class="benefit-list">
-            <li><span>1</span>Understand your property's current rental value.</li>
-            <li><span>2</span>Identify improvements that may strengthen rent and tenant appeal.</li>
-            <li><span>3</span>See whether Red Door's management approach fits your goals.</li>
-          </ul>
-        </div>
-        <form class="form-card reveal" data-analysis-form novalidate>
-          <div class="progress-label">
-            <span data-progress-text>Step 1 of 6</span>
-            <span data-progress-percent>16%</span>
-          </div>
-          <div class="progress-track" aria-hidden="true"><span class="progress-fill" data-progress-fill></span></div>
-
-          <div class="form-step is-active" data-step="0">
-            <h3>Property address</h3>
-            <label>Rental property address
-              <input name="address" autocomplete="street-address" required>
-            </label>
-          </div>
-
-          <div class="form-step" data-step="1">
-            <h3>Property basics</h3>
-            <div class="field-grid">
-              <label>Property type
-                <select name="property_type" required>
-                  <option value="">Select type</option>
-                  <option>Single-family home</option>
-                  <option>Condo or townhome</option>
-                  <option>Duplex or small multifamily</option>
-                  <option>Not sure</option>
-                </select>
-              </label>
-              <label>Bedrooms
-                <select name="bedrooms" required>
-                  <option value="">Select bedrooms</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5+</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-step" data-step="2">
-            <h3>Current condition</h3>
-            <label>How would you describe the property today?
-              <select name="condition" required>
-                <option value="">Select condition</option>
-                <option>Move-in ready</option>
-                <option>Mostly ready with minor updates needed</option>
-                <option>Needs repairs before marketing</option>
-                <option>I need help assessing it</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="form-step" data-step="3">
-            <h3>Occupancy status</h3>
-            <label>What is the current occupancy status?
-              <select name="occupancy" required>
-                <option value="">Select status</option>
-                <option>Vacant now</option>
-                <option>Tenant occupied</option>
-                <option>Owner occupied</option>
-                <option>Closing or purchase pending</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="form-step" data-step="4">
-            <h3>Your ownership goal</h3>
-            <label>What is your biggest goal or concern?
-              <textarea name="goal" required></textarea>
-            </label>
-          </div>
-
-          <div class="form-step" data-step="5">
-            <h3>Your contact details</h3>
-            <div class="field-grid">
-              <label>Name
-                <input name="name" autocomplete="name" required>
-              </label>
-              <label>Email
-                <input type="email" name="email" autocomplete="email" required>
-              </label>
-            </div>
-            <label>Phone
-              <input type="tel" name="phone" autocomplete="tel" required>
-            </label>
-            <p class="consent">By requesting a rental analysis, you agree that Red Door may use the information provided to follow up about your property management needs.</p>
-          </div>
-
-          <p class="error-text" aria-live="polite" data-form-error></p>
-          <div class="form-actions">
-            <button class="btn btn-secondary" type="button" data-form-prev>Previous</button>
-            <button class="btn btn-primary" type="button" data-form-next>Next</button>
-          </div>
-          <div class="confirmation" data-confirmation tabindex="-1">
-            <h3>Thanks. Your rental analysis request is ready.</h3>
-            <p>In a production version, this submission should connect to Red Door's existing lead-delivery workflow. For this mockup, the accessible confirmation state is shown here.</p>
-          </div>
-        </form>
-      </div>
-    </section>
-
     <section id="areas-served">
       <div class="container areas-visual">
-        <div class="market-coverage-card reveal" aria-live="polite">
-          <div>
-            <div class="coverage-eyebrow">Central Indiana Market Coverage</div>
-            <h3 class="coverage-city-name" data-market-name>Indianapolis</h3>
-            <p class="coverage-region" data-market-region>Urban core and surrounding townships</p>
-            <p class="coverage-insight" data-market-insight>Indianapolis owners need pricing, condition, leasing, maintenance, and tenant communication handled across a wide mix of neighborhoods and property types.</p>
-          </div>
-          <div class="coverage-guidance" aria-label="Selected market owner guidance">
-            <div class="coverage-guidance-item">
-              <span>Best fit for</span>
-              <p data-market-best>Single-family rentals, duplexes, small portfolios, and owners who want day-to-day management off their plate.</p>
-            </div>
-            <div class="coverage-guidance-item">
-              <span>What owners should watch</span>
-              <p data-market-watch>Block-by-block pricing, property condition, tenant screening, renewal timing, and maintenance responsiveness.</p>
-            </div>
-            <div class="coverage-guidance-item">
-              <span>How Red Door helps</span>
-              <p data-market-help>Rental analysis, leasing strategy, repair coordination, tenant communication, renewals, and owner visibility.</p>
-            </div>
-          </div>
-          <div class="coverage-questions">
-            <h4>Common owner questions</h4>
-            <ul class="coverage-question-list">
-              <li data-market-question-one>Is my rent realistic for this neighborhood and condition?</li>
-              <li data-market-question-two>What should be handled before showings begin?</li>
-              <li data-market-question-three>How will maintenance and tenant communication be managed?</li>
-            </ul>
-          </div>
-        </div>
-        <div class="reveal">
+        <div class="areas-copy reveal">
           <div class="section-kicker">Local Expertise Across Central Indiana</div>
-          <h2>Indianapolis Property Management Where You Need It</h2>
-          <p class="lead">Red Door manages beautiful homes in Indianapolis and surrounding Central Indiana communities.</p>
-          <div class="area-grid">
-            <a class="area-link is-active" href="/indianapolis-property-management" data-market-link data-market-name="Indianapolis" data-market-region="Urban core and surrounding townships" data-market-insight="Indianapolis owners need pricing, condition, leasing, maintenance, and tenant communication handled across a wide mix of neighborhoods and property types." data-market-best="Single-family rentals, duplexes, small portfolios, and owners who want day-to-day management off their plate." data-market-watch="Block-by-block pricing, property condition, tenant screening, renewal timing, and maintenance responsiveness." data-market-help="Rental analysis, leasing strategy, repair coordination, tenant communication, renewals, and owner visibility." data-market-question-one="Is my rent realistic for this neighborhood and condition?" data-market-question-two="What should be handled before showings begin?" data-market-question-three="How will maintenance and tenant communication be managed?"><span>Indianapolis<small>Established neighborhoods and broad renter demand.</small></span><em>View market</em></a>
-            <a class="area-link" href="/carmel-property-management" data-market-link data-market-name="Carmel" data-market-region="North metro" data-market-insight="Carmel rentals often need a higher-touch presentation strategy because owner expectations, tenant expectations, and property condition standards are usually elevated." data-market-best="Higher-value single-family homes, executive rentals, and owners who want careful tenant placement." data-market-watch="Premium pricing, presentation details, HOA expectations, move-in standards, and longer-term tenant fit." data-market-help="Red Door helps position the home correctly, prepare it for showings, screen carefully, and protect the owner experience." data-market-question-one="Does the home show at a level that matches the rent target?" data-market-question-two="Are HOA rules and maintenance expectations clear before leasing?" data-market-question-three="How do we balance rent, tenant quality, and vacancy risk?"><span>Carmel<small>Higher-value homes and executive renter interest.</small></span><em>View market</em></a>
-            <a class="area-link" href="/fishers-property-management" data-market-link data-market-name="Fishers" data-market-region="Northeast growth corridor" data-market-insight="Fishers is a strong fit for owners who want suburban renter demand, but the home still needs the right pricing and preparation to compete well." data-market-best="Single-family rentals, relocating owners, and investors watching northeast-side growth." data-market-watch="School-calendar timing, competing suburban listings, repair readiness, and tenant screening quality." data-market-help="Red Door supports pricing, listing preparation, showings, applications, lease execution, and maintenance coordination." data-market-question-one="What rent range will keep the home competitive?" data-market-question-two="Which condition items matter most before listing?" data-market-question-three="How quickly can showings and applications be handled?"><span>Fishers<small>Suburban growth and consistent tenant demand.</small></span><em>View market</em></a>
-            <a class="area-link" href="/noblesville-property-management" data-market-link data-market-name="Noblesville" data-market-region="Northern Hamilton County" data-market-insight="Noblesville can be attractive for long-term rental owners, especially when newer-home expectations and pricing strategy are handled carefully." data-market-best="Newer single-family rentals, investor-owned homes, and owners planning for long-term hold value." data-market-watch="Subdivision competition, commute patterns, property age, HOA rules, and realistic lease-up timing." data-market-help="Red Door helps owners understand market position, prepare the property, market it professionally, and manage the lease cycle." data-market-question-one="How does this home compare with nearby rental inventory?" data-market-question-two="Will HOA or subdivision expectations affect leasing?" data-market-question-three="What improvements would help the property show better?"><span>Noblesville<small>Newer growth areas with investor momentum.</small></span><em>View market</em></a>
-            <a class="area-link" href="/westfield-property-management" data-market-link data-market-name="Westfield" data-market-region="Northside expansion market" data-market-insight="Westfield owners should pay close attention to pricing and days on market because growth does not automatically mean every rental should be priced aggressively." data-market-best="Growth-minded investors, newer homes, and owners who want a disciplined leasing plan." data-market-watch="Pricing confidence, days on market, new construction competition, commute appeal, and condition." data-market-help="Red Door helps evaluate rent strategy, monitor showing feedback, adjust when needed, and protect long-term owner goals." data-market-question-one="Is the asking rent supported by current renter demand?" data-market-question-two="How long should we wait before adjusting strategy?" data-market-question-three="What would make this home stand out from newer inventory?"><span>Westfield<small>Long-term growth with careful pricing strategy.</small></span><em>View market</em></a>
-            <a class="area-link" href="/zionsville-property-management" data-market-link data-market-name="Zionsville" data-market-region="Northwest premium market" data-market-insight="Zionsville is more selective, so owners benefit from clear expectations around presentation, tenant fit, and whether the home is truly rental-ready." data-market-best="Premium single-family homes, selective owners, and renters looking for a polished suburban setting." data-market-watch="Presentation quality, tenant fit, maintenance standards, pricing patience, and lease terms." data-market-help="Red Door helps owners decide whether the rental plan, pricing, and property condition match the market." data-market-question-one="Is this home ready for a selective renter audience?" data-market-question-two="What lease terms protect the owner and property?" data-market-question-three="Would better presentation reduce vacancy risk?"><span>Zionsville<small>Selective inventory and high presentation standards.</small></span><em>View market</em></a>
-            <a class="area-link" href="/greenwood-property-management" data-market-link data-market-name="Greenwood" data-market-region="South metro" data-market-insight="Greenwood can work well for practical, well-prepared rentals where owners want steady leasing, responsive maintenance, and clear communication." data-market-best="Southside single-family homes, accidental landlords, and owners who want reliable systems." data-market-watch="Repair readiness, pricing against similar homes, tenant screening, and maintenance follow-through." data-market-help="Red Door helps prepare the home, market it clearly, coordinate repairs, and keep owners informed." data-market-question-one="What repairs should happen before the home is listed?" data-market-question-two="How does the rent compare with similar southside homes?" data-market-question-three="Who handles tenant issues after move-in?"><span>Greenwood<small>Southside access and steady rental demand.</small></span><em>View market</em></a>
-            <a class="area-link" href="/avon-property-management" data-market-link data-market-name="Avon" data-market-region="West metro" data-market-insight="Avon is often a fit for owners with single-family homes who need local leasing, maintenance, and tenant communication handled without being nearby." data-market-best="Move-out landlords, remote owners, and westside single-family rentals." data-market-watch="Commuter appeal, property condition, pricing against nearby suburbs, and maintenance vendors." data-market-help="Red Door provides local eyes, leasing support, maintenance coordination, and owner reporting." data-market-question-one="Can the home compete with nearby westside rentals?" data-market-question-two="What local maintenance support will the property need?" data-market-question-three="How will I stay informed if I am not nearby?"><span>Avon<small>Westside single-family homes and commuter appeal.</small></span><em>View market</em></a>
-            <a class="area-link" href="/brownsburg-property-management" data-market-link data-market-name="Brownsburg" data-market-region="Westside growth corridor" data-market-insight="Brownsburg owners often need a practical plan for pricing, showings, maintenance, and renewals so a good suburban rental does not become another job." data-market-best="Well-maintained single-family homes, move-out owners, and investors seeking steady westside demand." data-market-watch="Rent positioning, family-oriented presentation, maintenance response, lease renewal timing, and tenant quality." data-market-help="Red Door manages the leasing process, tenant communication, repair coordination, inspections, and renewals." data-market-question-one="Is the home priced to attract qualified renters?" data-market-question-two="Which updates would matter most before photos and showings?" data-market-question-three="How will renewals and maintenance be handled after leasing?"><span>Brownsburg<small>Family-oriented demand and westside growth.</small></span><em>View market</em></a>
-            <a class="area-link" href="/broad-ripple-property-management" data-market-link data-market-name="Broad Ripple" data-market-region="Indianapolis neighborhood market" data-market-insight="Broad Ripple owners should think beyond rent amount: walkability, condition, parking, maintenance response, and renter experience all shape performance." data-market-best="Neighborhood rentals, character homes, duplexes, and owners who need hands-on local coordination." data-market-watch="Parking, older-home maintenance, presentation, tenant expectations, and neighborhood-specific pricing." data-market-help="Red Door helps manage the details that matter in a neighborhood rental, from showings to repairs to ongoing communication." data-market-question-one="How do condition and walkability affect rent expectations?" data-market-question-two="Are older-home maintenance items ready for tenancy?" data-market-question-three="What will renters expect after move-in?"><span>Broad Ripple<small>Walkable neighborhood demand near the urban core.</small></span><em>View market</em></a>
+          <h2><span>Indianapolis Property Management</span><span>Where You Need It</span></h2>
+          <p class="lead">Red Door manages rental homes across Indianapolis and the surrounding Central Indiana communities where owners need steady leasing, responsive maintenance, and clear local guidance.</p>
+          <div class="county-grid" aria-label="Cities served by county">
+            <article class="county-card">
+              <div>
+                <h3>Marion County</h3>
+                <p>Indianapolis core, southside neighborhoods, and close-in rental markets.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/indianapolis-property-management">Indianapolis</a></li>
+                <li><a class="area-link" href="/southport-property-management">Southport</a></li>
+                <li><a class="area-link" href="/beech-grove-property-management">Beech Grove</a></li>
+                <li><a class="area-link" href="/lawrence-property-management">Lawrence</a></li>
+                <li><a class="area-link" href="/speedway-property-management">Speedway</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Hamilton County</h3>
+                <p>Northside suburbs with strong single-family and executive rental demand.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/carmel-property-management">Carmel</a></li>
+                <li><a class="area-link" href="/fishers-property-management">Fishers</a></li>
+                <li><a class="area-link" href="/noblesville-property-management">Noblesville</a></li>
+                <li><a class="area-link" href="/westfield-property-management">Westfield</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Madison County</h3>
+                <p>Northeast communities with commuter access and affordable rental options.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/anderson-property-management">Anderson</a></li>
+                <li><a class="area-link" href="/pendleton-property-management">Pendleton</a></li>
+                <li><a class="area-link" href="/lapel-property-management">Lapel</a></li>
+                <li><a class="area-link" href="/ingalls-property-management">Ingalls</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Hendricks County</h3>
+                <p>Westside communities popular with commuters and long-term rental owners.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/avon-property-management">Avon</a></li>
+                <li><a class="area-link" href="/brownsburg-property-management">Brownsburg</a></li>
+                <li><a class="area-link" href="/danville-property-management">Danville</a></li>
+                <li><a class="area-link" href="/plainfield-property-management">Plainfield</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Johnson County</h3>
+                <p>South metro rentals with steady demand from families and commuters.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/greenwood-property-management">Greenwood</a></li>
+                <li><a class="area-link" href="/franklin-property-management">Franklin</a></li>
+                <li><a class="area-link" href="/whiteland-property-management">Whiteland</a></li>
+                <li><a class="area-link" href="/bargersville-property-management">Bargersville</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Hancock County</h3>
+                <p>Eastside growth areas with newer-home inventory and suburban appeal.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/greenfield-property-management">Greenfield</a></li>
+                <li><a class="area-link" href="/mccordsville-property-management">McCordsville</a></li>
+                <li><a class="area-link" href="/new-palestine-property-management">New Palestine</a></li>
+                <li><a class="area-link" href="/fortville-property-management">Fortville</a></li>
+                <li><a class="area-link" href="/cumberland-property-management">Cumberland</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Shelby County</h3>
+                <p>Southeast rental markets serving owners near the Indianapolis outer ring.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/shelbyville-property-management">Shelbyville</a></li>
+                <li><a class="area-link" href="/fairland-property-management">Fairland</a></li>
+                <li><a class="area-link" href="/morristown-property-management">Morristown</a></li>
+                <li><a class="area-link" href="/boggstown-property-management">Boggstown</a></li>
+              </ul>
+            </article>
+            <article class="county-card">
+              <div>
+                <h3>Boone & Morgan Counties</h3>
+                <p>Northwest and southwest communities around the Indianapolis rental ring.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/zionsville-property-management">Zionsville</a></li>
+                <li><a class="area-link" href="/whitestown-property-management">Whitestown</a></li>
+                <li><a class="area-link" href="/lebanon-property-management">Lebanon</a></li>
+                <li><a class="area-link" href="/mooresville-property-management">Mooresville</a></li>
+                <li><a class="area-link" href="/martinsville-property-management">Martinsville</a></li>
+              </ul>
+            </article>
+            <article class="county-card is-wide">
+              <div>
+                <h3>Indianapolis Neighborhoods</h3>
+                <p>Close-in neighborhoods where property condition, tenant fit, and responsiveness matter.</p>
+              </div>
+              <ul class="city-list">
+                <li><a class="area-link" href="/broad-ripple-property-management">Broad Ripple</a></li>
+                <li><a class="area-link" href="/fountain-square-property-management">Fountain Square</a></li>
+                <li><a class="area-link" href="/fletcher-place-property-management">Fletcher Place</a></li>
+                <li><a class="area-link" href="/irvington-property-management">Irvington</a></li>
+                <li><a class="area-link" href="/downtown-indianapolis-property-management">Downtown Indianapolis</a></li>
+                <li><a class="area-link" href="/mass-ave-property-management">Mass Ave</a></li>
+                <li><a class="area-link" href="/wholesale-district-property-management">Wholesale District</a></li>
+                <li><a class="area-link" href="/indiana-avenue-property-management">Indiana Avenue</a></li>
+                <li><a class="area-link" href="/sobro-property-management">SoBro</a></li>
+                <li><a class="area-link" href="/meridian-kessler-property-management">Meridian-Kessler</a></li>
+                <li><a class="area-link" href="/butler-tarkington-property-management">Butler-Tarkington</a></li>
+                <li><a class="area-link" href="/herron-morton-property-management">Herron-Morton</a></li>
+                <li><a class="area-link" href="/old-northside-property-management">Old Northside</a></li>
+                <li><a class="area-link" href="/lockerbie-square-property-management">Lockerbie Square</a></li>
+                <li><a class="area-link" href="/chatham-arch-property-management">Chatham Arch</a></li>
+                <li><a class="area-link" href="/holy-cross-property-management">Holy Cross</a></li>
+                <li><a class="area-link" href="/cottage-home-property-management">Cottage Home</a></li>
+                <li><a class="area-link" href="/fall-creek-place-property-management">Fall Creek Place</a></li>
+                <li><a class="area-link" href="/garfield-park-property-management">Garfield Park</a></li>
+                <li><a class="area-link" href="/bates-hendricks-property-management">Bates-Hendricks</a></li>
+                <li><a class="area-link" href="/woodruff-place-property-management">Woodruff Place</a></li>
+                <li><a class="area-link" href="/riverside-property-management">Riverside</a></li>
+              </ul>
+            </article>
           </div>
-          <div class="townships">
-            <h3>Indianapolis Townships</h3>
-            <div class="area-grid">
+          <details class="townships">
+            <summary><span><strong>Indianapolis Townships</strong><small>Click to view the township service areas Red Door manages.</small></span></summary>
+            <div class="township-grid">
               <a class="area-link" href="/lawrence-township-property-management">Lawrence Township</a>
               <a class="area-link" href="/warren-township-property-management">Warren Township</a>
               <a class="area-link" href="/wayne-township-property-management">Wayne Township</a>
@@ -2679,7 +2735,7 @@
               <a class="area-link" href="/decatur-township-property-management">Decatur Township</a>
               <a class="area-link" href="/center-township-property-management">Center Township</a>
             </div>
-          </div>
+          </details>
         </div>
       </div>
     </section>
@@ -2751,9 +2807,8 @@
         <h2>Ready for a More Hands-Off Rental Experience?</h2>
         <p>Tell us about your Indianapolis rental property and discover how Red Door's proven management process can protect your investment, reduce day-to-day stress, and keep you informed without requiring you to manage every detail yourself.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#rental-analysis">Get a Free Rental Analysis</a>
+          <a class="btn btn-primary" href="/contact">Request a Rental Analysis</a>
           <a class="btn btn-secondary" href="https://calendly.com/cknight-19/phone-call" target="_blank" rel="noopener">Schedule a Call</a>
-          <a class="btn btn-secondary" href="tel:3176601626">Call 317.660.1626</a>
         </div>
       </div>
     </section>
@@ -2827,7 +2882,7 @@
 
   <div class="mobile-sticky" data-mobile-sticky aria-hidden="true">
     <a class="btn btn-secondary" href="tel:3176601626">Call Now</a>
-    <a class="btn btn-primary" href="#rental-analysis">Free Rent Analysis</a>
+    <a class="btn btn-primary" href="/contact">Rental Analysis</a>
   </div>
 
   <script type="application/ld+json">
@@ -2986,61 +3041,6 @@
           });
         });
       });
-
-      var marketLinks = Array.prototype.slice.call(document.querySelectorAll("[data-market-link]"));
-      if (marketLinks.length) {
-        var marketName = document.querySelector("[data-market-name]:not([data-market-link])");
-        var marketRegion = document.querySelector("[data-market-region]:not([data-market-link])");
-        var marketInsight = document.querySelector("[data-market-insight]:not([data-market-link])");
-        var marketBest = document.querySelector("[data-market-best]:not([data-market-link])");
-        var marketWatch = document.querySelector("[data-market-watch]:not([data-market-link])");
-        var marketHelp = document.querySelector("[data-market-help]:not([data-market-link])");
-        var marketQuestionOne = document.querySelector("[data-market-question-one]:not([data-market-link])");
-        var marketQuestionTwo = document.querySelector("[data-market-question-two]:not([data-market-link])");
-        var marketQuestionThree = document.querySelector("[data-market-question-three]:not([data-market-link])");
-
-        function updateMarketPanel(link) {
-          marketLinks.forEach(function (candidate) {
-            candidate.classList.toggle("is-active", candidate === link);
-          });
-          if (marketName) {
-            marketName.textContent = link.dataset.marketName;
-          }
-          if (marketRegion) {
-            marketRegion.textContent = link.dataset.marketRegion;
-          }
-          if (marketInsight) {
-            marketInsight.textContent = link.dataset.marketInsight;
-          }
-          if (marketBest) {
-            marketBest.textContent = link.dataset.marketBest;
-          }
-          if (marketWatch) {
-            marketWatch.textContent = link.dataset.marketWatch;
-          }
-          if (marketHelp) {
-            marketHelp.textContent = link.dataset.marketHelp;
-          }
-          if (marketQuestionOne) {
-            marketQuestionOne.textContent = link.dataset.marketQuestionOne;
-          }
-          if (marketQuestionTwo) {
-            marketQuestionTwo.textContent = link.dataset.marketQuestionTwo;
-          }
-          if (marketQuestionThree) {
-            marketQuestionThree.textContent = link.dataset.marketQuestionThree;
-          }
-        }
-
-        marketLinks.forEach(function (link) {
-          link.addEventListener("mouseenter", function () {
-            updateMarketPanel(link);
-          });
-          link.addEventListener("focus", function () {
-            updateMarketPanel(link);
-          });
-        });
-      }
 
       var reviewGrid = document.querySelector("[data-review-grid]") || document.querySelector("[data-google-review-grid]");
       if (reviewGrid) {
@@ -3626,90 +3626,6 @@
         } else if (reduceReviewMotion.addListener) {
           reduceReviewMotion.addListener(startReviewAuto);
         }
-      }
-
-      var form = document.querySelector("[data-analysis-form]");
-      if (form) {
-        var steps = Array.prototype.slice.call(form.querySelectorAll(".form-step"));
-        var previousButton = form.querySelector("[data-form-prev]");
-        var nextButton = form.querySelector("[data-form-next]");
-        var error = form.querySelector("[data-form-error]");
-        var progressText = form.querySelector("[data-progress-text]");
-        var progressPercent = form.querySelector("[data-progress-percent]");
-        var progressFill = form.querySelector("[data-progress-fill]");
-        var confirmation = form.querySelector("[data-confirmation]");
-        var current = 0;
-
-        function fieldsForStep(index) {
-          return Array.prototype.slice.call(steps[index].querySelectorAll("input, select, textarea"));
-        }
-
-        function updateForm() {
-          steps.forEach(function (step, index) {
-            step.classList.toggle("is-active", index === current);
-          });
-          var percent = Math.round((current + 1) / steps.length * 100);
-          progressText.textContent = "Step " + (current + 1) + " of " + steps.length;
-          progressPercent.textContent = percent + "%";
-          progressFill.style.width = percent + "%";
-          previousButton.style.visibility = current === 0 ? "hidden" : "visible";
-          nextButton.textContent = current === steps.length - 1 ? "Request My Rental Analysis" : "Next";
-        }
-
-        function validateStep() {
-          var valid = true;
-          var firstInvalid = null;
-          fieldsForStep(current).forEach(function (field) {
-            var fieldValid = field.checkValidity();
-            field.setAttribute("aria-invalid", String(!fieldValid));
-            if (!fieldValid && !firstInvalid) {
-              firstInvalid = field;
-            }
-            valid = valid && fieldValid;
-          });
-          error.textContent = valid ? "" : "Please complete the highlighted field before continuing.";
-          if (firstInvalid) {
-            firstInvalid.focus();
-          }
-          return valid;
-        }
-
-        previousButton.addEventListener("click", function () {
-          current = Math.max(0, current - 1);
-          error.textContent = "";
-          updateForm();
-        });
-
-        nextButton.addEventListener("click", function () {
-          if (!validateStep()) {
-            return;
-          }
-          if (current === steps.length - 1) {
-            confirmation.classList.add("is-visible");
-            confirmation.focus();
-            nextButton.disabled = true;
-            previousButton.disabled = true;
-            return;
-          }
-          current += 1;
-          updateForm();
-        });
-
-        fieldsForStep(current).forEach(function (field) {
-          field.addEventListener("input", function () {
-            field.setAttribute("aria-invalid", "false");
-            error.textContent = "";
-          });
-        });
-
-        form.querySelectorAll("input, select, textarea").forEach(function (field) {
-          field.addEventListener("input", function () {
-            field.setAttribute("aria-invalid", "false");
-            error.textContent = "";
-          });
-        });
-
-        updateForm();
       }
 
       if ("IntersectionObserver" in window) {
