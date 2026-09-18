@@ -261,7 +261,7 @@
       font-weight: 800;
       background: rgba(255, 255, 255, .08);
       border: 1px solid rgba(255, 255, 255, .16);
-      border-radius: 999px;
+      border-radius: var(--radius);
       backdrop-filter: blur(10px);
     }
 
@@ -284,7 +284,7 @@
       color: currentColor;
       background: transparent;
       border: 0;
-      border-radius: 999px;
+      border-radius: 6px;
       padding: 0 10px;
       white-space: nowrap;
     }
@@ -1394,6 +1394,26 @@
       align-items: start;
     }
 
+    .analysis-section {
+      position: relative;
+      overflow: hidden;
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .analysis-copy {
+      padding-top: 18px;
+    }
+
+    .analysis-copy h2 {
+      max-width: 620px;
+    }
+
+    .analysis-copy .lead {
+      max-width: 610px;
+    }
+
     .benefit-list {
       display: grid;
       gap: 12px;
@@ -1422,12 +1442,49 @@
       font-weight: 900;
     }
 
+    .analysis-assurance {
+      max-width: 560px;
+      margin: 24px 0 0;
+      padding: 16px 0 0;
+      color: var(--muted);
+      border-top: 1px solid #d8dbe0;
+      font-size: .92rem;
+    }
+
     .form-card {
       padding: clamp(24px, 4vw, 36px);
       background: var(--white);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+    }
+
+    .form-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .form-card-top strong {
+      display: block;
+      color: var(--ink);
+      font-size: 1.08rem;
+    }
+
+    .form-card-top span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .form-time {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      color: var(--ink) !important;
+      background: #eef0f3;
+      border-radius: 4px;
+      font-weight: 900;
     }
 
     .progress-label {
@@ -1449,11 +1506,17 @@
     }
 
     .progress-fill {
-      width: 16.66%;
+      width: 33.33%;
       height: 100%;
       display: block;
       background: var(--red);
       transition: width .22s ease;
+    }
+
+    .btn[disabled] {
+      cursor: wait;
+      opacity: .68;
+      transform: none;
     }
 
     .form-step {
@@ -1468,6 +1531,12 @@
     .form-step h3 {
       margin: 0;
       font-size: 1.32rem;
+    }
+
+    .step-intro {
+      margin: -7px 0 2px;
+      color: var(--muted);
+      font-size: .95rem;
     }
 
     label {
@@ -1487,6 +1556,20 @@
       background: var(--white);
       border: 1px solid #cfd3d9;
       border-radius: 6px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(188, 23, 25, .1);
+      outline: 0;
+    }
+
+    .field-hint {
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 400;
     }
 
     textarea {
@@ -1515,6 +1598,23 @@
       font-weight: 800;
     }
 
+    .check-label {
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .check-label input {
+      width: 20px;
+      min-height: 20px;
+      margin: 1px 0 0;
+      accent-color: var(--red);
+    }
+
     .form-actions {
       display: flex;
       justify-content: space-between;
@@ -1524,14 +1624,38 @@
 
     .confirmation {
       display: none;
-      padding: 26px;
-      background: #f7fbf8;
-      border: 1px solid #cfe8d7;
-      border-radius: var(--radius);
+      padding: 12px 0 4px;
     }
 
     .confirmation.is-visible {
       display: block;
+    }
+
+    .confirmation-mark {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 6px;
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .confirmation h3 {
+      margin-bottom: 10px;
+      font-size: 1.65rem;
+    }
+
+    .confirmation-address {
+      margin: 20px 0;
+      padding: 16px;
+      color: var(--ink);
+      background: var(--soft);
+      border-left: 4px solid var(--red);
+      font-weight: 900;
     }
 
     .consent {
@@ -1832,7 +1956,7 @@
       text-align: center;
       background:
         linear-gradient(180deg, rgba(8, 8, 8, .72), rgba(8, 8, 8, .86)),
-        url("red-door-hero.png") center right / cover no-repeat;
+        url("../red-door-hero.png") center right / cover no-repeat;
     }
 
     .final-cta .container {
@@ -2270,6 +2394,15 @@
         width: 100%;
       }
 
+      .form-card-top {
+        display: grid;
+        gap: 10px;
+      }
+
+      .form-time {
+        width: max-content;
+      }
+
       .mobile-sticky {
         display: grid;
       }
@@ -2354,7 +2487,7 @@
         </div>
         <a href="/about">About Us</a>
         <a href="/blog">Watch &amp; Learn</a>
-        <a class="nav-cta" href="/contact">Free Rental Analysis</a>
+        <a class="nav-cta" href="#rental-analysis">Free Rental Analysis</a>
       </nav>
     </div>
   </header>
@@ -2367,7 +2500,7 @@
           <span>Hands-Off Property Management</span>
         </h1>
         <div class="cta-row">
-          <a class="btn btn-primary" href="/contact" data-track="hero-request-analysis">Request a Rental Analysis</a>
+          <a class="btn btn-primary" href="#rental-analysis" data-track="hero-request-analysis">Request a Rental Analysis</a>
           <a class="btn btn-secondary" href="https://calendly.com/cknight-19/phone-call" target="_blank" rel="noopener" data-track="hero-schedule-call">Schedule a Call</a>
         </div>
       </div>
@@ -2394,6 +2527,194 @@
           </div>
           <div class="proof-item proof-trust">
             <span>Trusted by Indianapolis rental owners and investors.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="analysis-section" id="rental-analysis" aria-labelledby="rental-analysis-title">
+      <div class="container analysis-grid">
+        <div class="analysis-copy reveal">
+          <div class="section-kicker">Free Rental Analysis</div>
+          <h2 id="rental-analysis-title">What Could Your Indianapolis Property Rent For?</h2>
+          <p class="lead">Start with the property address. We will use the details you provide to prepare a local rental estimate and help you understand the next best step for your property.</p>
+          <ul class="benefit-list" aria-label="What your rental analysis includes">
+            <li><span aria-hidden="true">1</span><div>Estimated monthly rental range</div></li>
+            <li><span aria-hidden="true">2</span><div>Local market and comparable-property context</div></li>
+            <li><span aria-hidden="true">3</span><div>Practical recommendations from a local expert</div></li>
+          </ul>
+          <p class="analysis-assurance">No obligation and no generic national estimate. Your information is used to prepare your analysis and follow up about the property.</p>
+        </div>
+
+        <div class="form-card reveal">
+          <div class="form-card-top">
+            <div>
+              <strong>Get your personalized rent estimate</strong>
+              <span>Answer a few quick questions to get started.</span>
+            </div>
+            <span class="form-time">About 2 min</span>
+          </div>
+
+          <form action="/api/rental-analysis" method="post" data-rental-analysis-form data-endpoint="" novalidate>
+            <input type="hidden" name="lead_source" value="Homepage Rental Analysis">
+            <input type="hidden" name="utm_source" value="">
+            <input type="hidden" name="utm_medium" value="">
+            <input type="hidden" name="utm_campaign" value="">
+
+            <div class="progress-label">
+              <span data-progress-label>Property address</span>
+              <span data-progress-count>Step 1 of 3</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Rental analysis progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1" data-progress-track>
+              <span class="progress-fill" data-progress-fill></span>
+            </div>
+
+            <div class="form-step is-active" data-form-step="Property address">
+              <h3>Where is the rental property?</h3>
+              <p class="step-intro">The address helps us find the most relevant nearby rental comparisons.</p>
+              <label>
+                Street address
+                <input type="text" name="property_address" autocomplete="street-address" placeholder="123 Main Street" required>
+              </label>
+              <div class="field-grid">
+                <label>
+                  City
+                  <input type="text" name="property_city" autocomplete="address-level2" placeholder="Indianapolis" required>
+                </label>
+                <label>
+                  ZIP code
+                  <input type="text" name="property_zip" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" placeholder="46220" required>
+                </label>
+              </div>
+              <label>
+                Property type
+                <select name="property_type" required>
+                  <option value="">Choose a property type</option>
+                  <option>Single-family home</option>
+                  <option>Townhome</option>
+                  <option>Condo</option>
+                  <option>Duplex</option>
+                  <option>Multi-family property</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <p class="error-text" data-step-error aria-live="polite"></p>
+              <div class="form-actions">
+                <span></span>
+                <button class="btn btn-primary" type="button" data-next-step>Continue</button>
+              </div>
+            </div>
+
+            <div class="form-step" data-form-step="Property details">
+              <h3>Tell us a little about the property</h3>
+              <p class="step-intro">A few details help narrow the rental range and make the follow-up more useful.</p>
+              <div class="field-grid">
+                <label>
+                  Bedrooms
+                  <select name="bedrooms" required>
+                    <option value="">Select</option>
+                    <option>Studio</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5+</option>
+                  </select>
+                </label>
+                <label>
+                  Bathrooms
+                  <select name="bathrooms" required>
+                    <option value="">Select</option>
+                    <option>1</option>
+                    <option>1.5</option>
+                    <option>2</option>
+                    <option>2.5</option>
+                    <option>3</option>
+                    <option>3.5+</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                Current property status
+                <select name="occupancy_status" required>
+                  <option value="">Choose the closest option</option>
+                  <option>Vacant and ready to rent</option>
+                  <option>Owner occupied</option>
+                  <option>Tenant occupied</option>
+                  <option>Being purchased</option>
+                  <option>Needs repairs or renovation</option>
+                </select>
+              </label>
+              <label>
+                When would you like help?
+                <select name="management_timeline" required>
+                  <option value="">Select a timeline</option>
+                  <option>As soon as possible</option>
+                  <option>Within 30 days</option>
+                  <option>Within 2-3 months</option>
+                  <option>Just researching for now</option>
+                </select>
+              </label>
+              <label>
+                <span>Current or expected monthly rent <span class="field-hint">Optional</span></span>
+                <input type="number" name="expected_rent" min="0" step="25" inputmode="numeric" placeholder="1750">
+              </label>
+              <p class="error-text" data-step-error aria-live="polite"></p>
+              <div class="form-actions">
+                <button class="btn btn-secondary" type="button" data-previous-step>Back</button>
+                <button class="btn btn-primary" type="button" data-next-step>Continue</button>
+              </div>
+            </div>
+
+            <div class="form-step" data-form-step="Your information">
+              <h3>Where should we send your analysis?</h3>
+              <p class="step-intro">A local rental specialist can also follow up if there are details that affect the estimate.</p>
+              <div class="field-grid">
+                <label>
+                  First name
+                  <input type="text" name="first_name" autocomplete="given-name" required>
+                </label>
+                <label>
+                  Last name
+                  <input type="text" name="last_name" autocomplete="family-name" required>
+                </label>
+              </div>
+              <label>
+                Email address
+                <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+              </label>
+              <label>
+                Phone number
+                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(317) 555-0123" required>
+              </label>
+              <label>
+                Preferred way to connect
+                <select name="preferred_contact" required>
+                  <option value="">Choose one</option>
+                  <option>Email</option>
+                  <option>Phone call</option>
+                  <option>Text message</option>
+                </select>
+              </label>
+              <label class="check-label">
+                <input type="checkbox" name="contact_consent" value="yes" required>
+                <span>I agree that Red Door Property Management may contact me by phone, email, or text about this property and my rental analysis. Message and data rates may apply.</span>
+              </label>
+              <p class="error-text" data-step-error aria-live="polite"></p>
+              <div class="form-actions">
+                <button class="btn btn-secondary" type="button" data-previous-step>Back</button>
+                <button class="btn btn-primary" type="submit" data-submit-analysis>Get My Rental Analysis</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="confirmation" data-analysis-confirmation role="status" aria-live="polite" tabindex="-1">
+            <div class="confirmation-mark" aria-hidden="true">&#10003;</div>
+            <h3>Your rental analysis request is in.</h3>
+            <p>We will review the property details and use local market data to prepare your personalized rental estimate.</p>
+            <div class="confirmation-address" data-confirmation-address></div>
+            <p data-confirmation-contact></p>
+            <button class="btn btn-secondary" type="button" data-analysis-reset>Analyze Another Property</button>
           </div>
         </div>
       </div>
@@ -2807,7 +3128,7 @@
         <h2>Ready for a More Hands-Off Rental Experience?</h2>
         <p>Tell us about your Indianapolis rental property and discover how Red Door's proven management process can protect your investment, reduce day-to-day stress, and keep you informed without requiring you to manage every detail yourself.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="/contact">Request a Rental Analysis</a>
+          <a class="btn btn-primary" href="#rental-analysis">Request a Rental Analysis</a>
           <a class="btn btn-secondary" href="https://calendly.com/cknight-19/phone-call" target="_blank" rel="noopener">Schedule a Call</a>
         </div>
       </div>
@@ -2882,7 +3203,7 @@
 
   <div class="mobile-sticky" data-mobile-sticky aria-hidden="true">
     <a class="btn btn-secondary" href="tel:3176601626">Call Now</a>
-    <a class="btn btn-primary" href="/contact">Rental Analysis</a>
+    <a class="btn btn-primary" href="#rental-analysis">Rental Analysis</a>
   </div>
 
   <script type="application/ld+json">
@@ -3041,6 +3362,171 @@
           });
         });
       });
+
+      var rentalForm = document.querySelector("[data-rental-analysis-form]");
+      if (rentalForm) {
+        var rentalSteps = Array.prototype.slice.call(rentalForm.querySelectorAll("[data-form-step]"));
+        var progressLabel = rentalForm.querySelector("[data-progress-label]");
+        var progressCount = rentalForm.querySelector("[data-progress-count]");
+        var progressTrack = rentalForm.querySelector("[data-progress-track]");
+        var progressFill = rentalForm.querySelector("[data-progress-fill]");
+        var analysisConfirmation = document.querySelector("[data-analysis-confirmation]");
+        var confirmationAddress = document.querySelector("[data-confirmation-address]");
+        var confirmationContact = document.querySelector("[data-confirmation-contact]");
+        var resetAnalysis = document.querySelector("[data-analysis-reset]");
+        var currentRentalStep = 0;
+
+        function setRentalStep(index, moveFocus) {
+          currentRentalStep = Math.max(0, Math.min(index, rentalSteps.length - 1));
+          rentalSteps.forEach(function (step, stepIndex) {
+            step.classList.toggle("is-active", stepIndex === currentRentalStep);
+          });
+          var activeStep = rentalSteps[currentRentalStep];
+          var progress = ((currentRentalStep + 1) / rentalSteps.length) * 100;
+          progressLabel.textContent = activeStep.getAttribute("data-form-step");
+          progressCount.textContent = "Step " + (currentRentalStep + 1) + " of " + rentalSteps.length;
+          progressTrack.setAttribute("aria-valuenow", String(currentRentalStep + 1));
+          progressFill.style.width = progress + "%";
+          if (moveFocus) {
+            var heading = activeStep.querySelector("h3");
+            heading.setAttribute("tabindex", "-1");
+            heading.focus();
+          }
+        }
+
+        function validateRentalStep(step) {
+          var fields = Array.prototype.slice.call(step.querySelectorAll("input, select, textarea"));
+          var error = step.querySelector("[data-step-error]");
+          var firstInvalid = null;
+          fields.forEach(function (field) {
+            var valid = field.checkValidity();
+            field.setAttribute("aria-invalid", String(!valid));
+            if (!valid && !firstInvalid) {
+              firstInvalid = field;
+            }
+          });
+          if (firstInvalid) {
+            error.textContent = "Please complete the highlighted field before continuing.";
+            firstInvalid.focus();
+            firstInvalid.reportValidity();
+            return false;
+          }
+          error.textContent = "";
+          return true;
+        }
+
+        rentalForm.querySelectorAll("input, select, textarea").forEach(function (field) {
+          function clearFieldError() {
+            if (field.checkValidity()) {
+              field.removeAttribute("aria-invalid");
+            }
+          }
+          field.addEventListener("input", clearFieldError);
+          field.addEventListener("change", clearFieldError);
+        });
+
+        rentalForm.querySelectorAll("[data-next-step]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            if (validateRentalStep(rentalSteps[currentRentalStep])) {
+              setRentalStep(currentRentalStep + 1, true);
+            }
+          });
+        });
+
+        rentalForm.querySelectorAll("[data-previous-step]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            setRentalStep(currentRentalStep - 1, true);
+          });
+        });
+
+        var queryParams = new URLSearchParams(window.location.search);
+        ["utm_source", "utm_medium", "utm_campaign"].forEach(function (name) {
+          var field = rentalForm.elements[name];
+          if (field) {
+            field.value = queryParams.get(name) || "";
+          }
+        });
+
+        function submitRentalAnalysis(payload) {
+          var endpoint = rentalForm.getAttribute("data-endpoint");
+          window.dispatchEvent(new CustomEvent("rentalanalysis:submit", { detail: payload }));
+          if (!endpoint) {
+            return Promise.resolve({ prototype: true });
+          }
+          return fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          }).then(function (response) {
+            if (!response.ok) {
+              throw new Error("Rental analysis request failed.");
+            }
+            return response.text();
+          });
+        }
+
+        rentalForm.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" && currentRentalStep < rentalSteps.length - 1 && event.target.tagName !== "TEXTAREA") {
+            event.preventDefault();
+            rentalSteps[currentRentalStep].querySelector("[data-next-step]").click();
+          }
+        });
+
+        rentalForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (currentRentalStep < rentalSteps.length - 1) {
+            if (validateRentalStep(rentalSteps[currentRentalStep])) {
+              setRentalStep(currentRentalStep + 1, true);
+            }
+            return;
+          }
+          if (!validateRentalStep(rentalSteps[currentRentalStep])) {
+            return;
+          }
+
+          var submitButton = rentalForm.querySelector("[data-submit-analysis]");
+          var submitError = rentalSteps[currentRentalStep].querySelector("[data-step-error]");
+          var originalText = submitButton.textContent;
+          submitButton.disabled = true;
+          submitButton.textContent = "Preparing Analysis...";
+
+          var payload = {};
+          new FormData(rentalForm).forEach(function (value, key) {
+            payload[key] = value;
+          });
+
+          submitRentalAnalysis(payload).then(function () {
+            var fullAddress = payload.property_address + ", " + payload.property_city + ", IN " + payload.property_zip;
+            confirmationAddress.textContent = fullAddress;
+            confirmationContact.textContent = "We will send the analysis to " + payload.email + " and follow up using your preferred contact method.";
+            rentalForm.hidden = true;
+            analysisConfirmation.classList.add("is-visible");
+            analysisConfirmation.focus();
+          }).catch(function () {
+            submitError.textContent = "We could not submit your request. Please try again or call 317.660.1626.";
+          }).finally(function () {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+          });
+        });
+
+        if (resetAnalysis) {
+          resetAnalysis.addEventListener("click", function () {
+            rentalForm.reset();
+            ["utm_source", "utm_medium", "utm_campaign"].forEach(function (name) {
+              rentalForm.elements[name].value = queryParams.get(name) || "";
+            });
+            analysisConfirmation.classList.remove("is-visible");
+            rentalForm.hidden = false;
+            rentalForm.querySelectorAll('[aria-invalid="true"]').forEach(function (field) {
+              field.removeAttribute("aria-invalid");
+            });
+            setRentalStep(0, true);
+          });
+        }
+
+        setRentalStep(0, false);
+      }
 
       var reviewGrid = document.querySelector("[data-review-grid]") || document.querySelector("[data-google-review-grid]");
       if (reviewGrid) {
