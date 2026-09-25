@@ -1,0 +1,2040 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Market Readiness Report | Red Door Property Management</title>
+  <meta name="description" content="Private owner-facing Market Readiness Report prototype for Red Door Property Management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #bc1719;
+      --red-dark: #8c0c03;
+      --red-soft: #fae7e7;
+      --red-quiet: #fff4f3;
+      --ink: #191817;
+      --charcoal: #242322;
+      --text: #373b41;
+      --muted: #69717d;
+      --line: #e6e0d8;
+      --line-strong: #d8d0c6;
+      --soft: #f7f4ef;
+      --soft-2: #fbfaf7;
+      --paper: #ffffff;
+      --gold: #a8752a;
+      --green: #386c52;
+      --blue: #315f7b;
+      --amber: #8a5a11;
+      --shadow: 0 18px 48px rgba(41, 26, 18, .11);
+      --shadow-soft: 0 10px 28px rgba(25, 24, 23, .08);
+      --radius: 8px;
+      --max: 1220px;
+      --font: Inter, Arial, Helvetica, sans-serif;
+      --serif: Literata, Georgia, serif;
+      --nav-offset: 76px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--soft);
+      font-family: var(--font);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(188, 23, 25, .35);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      z-index: 100;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--red);
+      border-radius: 6px;
+      font-weight: 900;
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      color: #f8f2ec;
+      background: var(--ink);
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .topbar-inner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .report-hero {
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(25, 24, 23, .98), rgba(38, 35, 32, .94)),
+        radial-gradient(circle at 80% 0, rgba(188, 23, 25, .34), transparent 34%);
+      border-bottom: 5px solid var(--red);
+    }
+
+    .hero-inner {
+      min-height: 330px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(320px, .7fr);
+      align-items: center;
+      gap: 42px;
+      padding: 48px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 26px;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      background: var(--red);
+      border-radius: 4px;
+      box-shadow: 0 12px 26px rgba(188, 23, 25, .3);
+    }
+
+    .brand-mark::before {
+      content: "";
+      width: 24px;
+      height: 31px;
+      border: 3px solid #fff;
+      border-bottom-width: 5px;
+      border-radius: 2px 2px 1px 1px;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      right: 14px;
+      top: 25px;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .brand-text {
+      display: grid;
+      gap: 2px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .brand-text span:first-child {
+      font-size: 1.08rem;
+    }
+
+    .brand-text span:last-child {
+      color: rgba(255, 255, 255, .75);
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      color: var(--red-dark);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .report-hero .eyebrow {
+      color: #ffc1bd;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--serif);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .report-hero h1 {
+      max-width: 780px;
+      margin-top: 8px;
+      color: #fff;
+      font-size: clamp(2.3rem, 6vw, 4.65rem);
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, .78);
+      font-size: 1.06rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      color: rgba(255, 255, 255, .86);
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: var(--radius);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .hero-panel {
+      padding: 24px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .status-badge,
+    .priority-badge,
+    .decision-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: normal;
+    }
+
+    .status-badge {
+      color: #fff;
+      background: var(--red);
+      box-shadow: 0 8px 18px rgba(188, 23, 25, .18);
+    }
+
+    .priority-marketing {
+      color: var(--red-dark);
+      background: var(--red-soft);
+      border: 1px solid #f2c7c6;
+    }
+
+    .priority-move-in {
+      color: #6f3c00;
+      background: #fff1da;
+      border: 1px solid #f3d4a5;
+    }
+
+    .priority-experience {
+      color: #25516c;
+      background: #e9f2f7;
+      border: 1px solid #cce0ec;
+    }
+
+    .priority-capital {
+      color: #345e49;
+      background: #e9f4ee;
+      border: 1px solid #cae2d5;
+    }
+
+    .hero-actions,
+    .action-row,
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 17px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      font-weight: 900;
+      text-align: center;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .btn-primary:hover {
+      background: var(--red-dark);
+      border-color: var(--red-dark);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: var(--soft-2);
+    }
+
+    .hero-panel .btn {
+      flex: 1 1 180px;
+    }
+
+    .report-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(25, 24, 23, .06);
+      backdrop-filter: blur(12px);
+    }
+
+    .report-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: var(--nav-offset);
+    }
+
+    .report-nav strong {
+      color: var(--ink);
+      font-size: .88rem;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      padding: 8px 11px;
+      color: var(--muted);
+      border-radius: 6px;
+      font-size: .86rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--red-dark);
+      background: var(--red-quiet);
+    }
+
+    main {
+      padding: 34px 0 64px;
+    }
+
+    section {
+      scroll-margin-top: calc(var(--nav-offset) + 22px);
+    }
+
+    .report-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      align-items: start;
+      gap: 26px;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    .section-panel {
+      padding: clamp(22px, 3vw, 34px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin-top: 6px;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+    }
+
+    .section-heading p {
+      max-width: 690px;
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .summary-card {
+      min-height: 132px;
+      padding: 18px;
+      background: var(--soft-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .summary-card span {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-top: 12px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+      line-height: 1.08;
+    }
+
+    .summary-card small {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .summary-note {
+      margin: 18px 0 0;
+      padding: 18px;
+      color: #413b35;
+      background: #fff9f1;
+      border: 1px solid #edd9bb;
+      border-radius: var(--radius);
+      font-weight: 600;
+    }
+
+    .readiness-track {
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--ink);
+      border-radius: var(--radius);
+    }
+
+    .readiness-track h3 {
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    .stage-line {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stage-line::before {
+      content: "";
+      position: absolute;
+      top: 19px;
+      left: 12%;
+      right: 12%;
+      height: 3px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, .7);
+      font-size: .82rem;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .stage::before {
+      content: "";
+      width: 38px;
+      height: 38px;
+      background: #383634;
+      border: 4px solid #5a5550;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .stage.is-current {
+      color: #fff;
+    }
+
+    .stage.is-current::before {
+      background: var(--red);
+      border-color: #ffc6c2;
+      box-shadow: 0 0 0 7px rgba(188, 23, 25, .18);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      min-height: 40px;
+      padding: 8px 12px;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: .84rem;
+      font-weight: 900;
+    }
+
+    .filter-btn[aria-pressed="true"] {
+      color: #fff;
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #fff;
+      background: var(--ink);
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      color: var(--text);
+      background: #fff;
+      font-size: .88rem;
+    }
+
+    td strong {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .mobile-card-list {
+      display: none;
+      gap: 12px;
+    }
+
+    .mobile-table-card {
+      padding: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mobile-card-row {
+      display: grid;
+      gap: 4px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .mobile-card-row:first-of-type {
+      border-top: 0;
+    }
+
+    .mobile-card-row span {
+      color: var(--muted);
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .recommendation-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .recommendation-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow: clip;
+    }
+
+    .recommendation-card[hidden],
+    tr[hidden],
+    .mobile-table-card[hidden] {
+      display: none;
+    }
+
+    .recommendation-card details {
+      display: block;
+    }
+
+    .recommendation-card summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      padding: 20px;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .recommendation-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .card-title-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-title-line span:first-child {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .recommendation-card h3 {
+      color: var(--ink);
+      font-size: 1.25rem;
+    }
+
+    .expand-indicator {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--red-dark);
+      background: var(--red-quiet);
+      border: 1px solid #f2cecc;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      font-weight: 900;
+    }
+
+    details[open] .expand-indicator {
+      transform: rotate(45deg);
+    }
+
+    .card-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 20px;
+      padding: 0 20px 22px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .detail-box {
+      padding: 15px;
+      background: var(--soft-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .detail-box h4 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .detail-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: .94rem;
+    }
+
+    .evidence-panel {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .photo-placeholder {
+      position: relative;
+      min-height: 210px;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(33, 32, 31, .06), rgba(255, 255, 255, .45)),
+        linear-gradient(0deg, rgba(25, 24, 23, .12), rgba(25, 24, 23, .12)),
+        repeating-linear-gradient(135deg, #c7b9aa 0 14px, #d8cec2 14px 28px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .photo-placeholder::before {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      bottom: 16%;
+      height: 40%;
+      background:
+        linear-gradient(90deg, transparent 0 9%, rgba(255, 255, 255, .74) 9% 21%, transparent 21% 31%, rgba(255, 255, 255, .7) 31% 43%, transparent 43%),
+        linear-gradient(#8b7661, #6c5948);
+      border-radius: 4px 4px 2px 2px;
+      box-shadow: 0 10px 20px rgba(25, 24, 23, .2);
+    }
+
+    .photo-placeholder::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 8px 10px;
+      color: #fff;
+      background: rgba(25, 24, 23, .72);
+      border-radius: 6px;
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    .coordination-note {
+      display: flex;
+      align-items: start;
+      gap: 9px;
+      padding: 12px;
+      color: #2f5943;
+      background: #eef7f2;
+      border: 1px solid #cfe6d8;
+      border-radius: var(--radius);
+      font-size: .86rem;
+      font-weight: 800;
+    }
+
+    .decision-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .decision-btn {
+      min-height: 42px;
+      padding: 9px 10px;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .decision-btn[aria-pressed="true"] {
+      color: #fff;
+      background: var(--red);
+      border-color: var(--red);
+      box-shadow: 0 9px 18px rgba(188, 23, 25, .15);
+    }
+
+    .decision-pill {
+      color: var(--muted);
+      background: #f0efec;
+      border: 1px solid var(--line);
+    }
+
+    .decision-pill.approved {
+      color: #fff;
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .decision-pill.owner {
+      color: #fff;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .decision-pill.question {
+      color: #fff;
+      background: var(--amber);
+      border-color: var(--amber);
+    }
+
+    .decision-pill.declined {
+      color: #fff;
+      background: #6b6461;
+      border-color: #6b6461;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: calc(var(--nav-offset) + 20px);
+      display: grid;
+      gap: 14px;
+    }
+
+    .decision-summary {
+      padding: 22px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .decision-summary h2 {
+      font-size: 1.45rem;
+    }
+
+    .summary-counts {
+      display: grid;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .summary-counts p {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .summary-counts p:last-child {
+      border-bottom: 0;
+    }
+
+    .summary-counts strong {
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+
+    .approved-total {
+      padding: 16px;
+      background: var(--ink);
+      border-radius: var(--radius);
+    }
+
+    .approved-total span {
+      display: block;
+      color: rgba(255, 255, 255, .68);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .approved-total strong {
+      display: block;
+      margin-top: 7px;
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      line-height: 1;
+    }
+
+    .decision-summary .btn {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .sidebar-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: .83rem;
+      font-weight: 700;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .video-placeholder {
+      min-height: 230px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(25, 24, 23, .82), rgba(25, 24, 23, .54)),
+        repeating-linear-gradient(45deg, #665f57 0 18px, #746b62 18px 36px);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .play-circle {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      color: var(--red);
+      background: #fff;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .gallery-grid .photo-placeholder {
+      min-height: 145px;
+    }
+
+    .disclaimer-note {
+      margin-top: 18px;
+      padding: 16px;
+      color: var(--muted);
+      background: var(--soft-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      padding: 18px;
+      background: var(--soft-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .step span {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      color: #fff;
+      background: var(--red);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      font-size: 1.08rem;
+    }
+
+    .step p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .terms-panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .terms-panel summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .terms-panel summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .terms-panel ul {
+      margin: 0;
+      padding: 0 20px 20px 40px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .terms-panel li + li {
+      margin-top: 8px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(25, 24, 23, .64);
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal {
+      width: min(720px, 100%);
+      max-height: min(760px, calc(100vh - 36px));
+      overflow: auto;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .32);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 24px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-header h2 {
+      font-size: 1.75rem;
+    }
+
+    .close-btn {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .modal-body {
+      padding: 20px 24px 24px;
+    }
+
+    .modal-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .modal-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      padding: 13px;
+      background: var(--soft-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .modal-item strong {
+      color: var(--ink);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 16px 24px 24px;
+    }
+
+    .print-only {
+      display: none;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-inner,
+      .report-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+        order: -1;
+      }
+
+      .summary-grid,
+      .steps,
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 780px) {
+      .topbar-inner,
+      .report-nav-inner,
+      .section-heading,
+      .status-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .report-nav-inner {
+        padding: 10px 0;
+      }
+
+      .report-nav {
+        position: static;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      main {
+        padding-top: 22px;
+      }
+
+      .summary-grid,
+      .media-grid,
+      .steps,
+      .gallery-grid,
+      .detail-grid,
+      .decision-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .card-body {
+        grid-template-columns: 1fr;
+      }
+
+      .desktop-table {
+        display: none;
+      }
+
+      .mobile-card-list {
+        display: grid;
+      }
+
+      .hero-inner {
+        min-height: auto;
+        padding: 34px 0;
+      }
+
+      .hero-panel {
+        padding: 18px;
+      }
+
+      .section-panel {
+        padding: 20px;
+      }
+
+      .stage-line {
+        gap: 4px;
+      }
+
+      .stage {
+        font-size: .74rem;
+      }
+
+      .recommendation-card summary {
+        grid-template-columns: 1fr;
+      }
+
+      .expand-indicator {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .hero-meta,
+      .hero-actions,
+      .cta-row {
+        display: grid;
+      }
+
+      .btn,
+      .meta-chip {
+        width: 100%;
+      }
+
+      .summary-card {
+        min-height: auto;
+      }
+
+      .modal-footer {
+        display: grid;
+      }
+    }
+
+    @media print {
+      :root {
+        --nav-offset: 0px;
+      }
+
+      * {
+        box-shadow: none !important;
+      }
+
+      body {
+        color: #222;
+        background: #fff;
+      }
+
+      .topbar,
+      .report-nav,
+      .hero-actions,
+      .filter-bar,
+      .decision-controls,
+      .side-panel .btn,
+      .modal-backdrop,
+      .cta-row,
+      .close-btn,
+      .skip-link {
+        display: none !important;
+      }
+
+      .report-hero {
+        color: #111;
+        background: #fff;
+        border-bottom: 2px solid #111;
+      }
+
+      .report-hero h1,
+      .brand-text span:last-child,
+      .hero-copy,
+      .report-hero .eyebrow {
+        color: #111;
+      }
+
+      .hero-inner,
+      .report-layout,
+      .card-body {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 18px 0 0;
+      }
+
+      .section-panel,
+      .recommendation-card,
+      .decision-summary,
+      .terms-panel,
+      .hero-panel {
+        border-color: #bbb;
+        page-break-inside: avoid;
+      }
+
+      .recommendation-card summary {
+        cursor: default;
+      }
+
+      .print-only {
+        display: block;
+      }
+
+      .video-placeholder,
+      .photo-placeholder {
+        border: 1px solid #aaa;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to report content</a>
+  <header>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <span>Private owner report prototype</span>
+        <span>Red Door Property Management</span>
+      </div>
+    </div>
+    <section class="report-hero" aria-labelledby="report-title">
+      <div class="container hero-inner">
+        <div>
+          <a class="brand" href="#" aria-label="Red Door Property Management">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-text">
+              <span>Red Door</span>
+              <span>Property Management</span>
+            </span>
+          </a>
+          <div class="eyebrow">Owner Review Dashboard</div>
+          <h1 id="report-title">Market Readiness Report</h1>
+          <p class="hero-copy">A private, decision-ready summary of the work recommended before this home is marketed and prepared for resident occupancy.</p>
+          <div class="hero-meta" aria-label="Report details">
+            <span class="meta-chip">124 Sample Lane, Indianapolis, IN 46201</span>
+            <span class="meta-chip">Assessment date: September 24, 2026</span>
+            <span class="meta-chip">Prepared for: Sample Property Owner</span>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Report action panel">
+          <div class="status-row">
+            <div>
+              <div class="section-kicker">Current status</div>
+              <h2>Action Required</h2>
+            </div>
+            <span class="status-badge">Action Required</span>
+          </div>
+          <p>Prepared by Red Door Property Management. Review each recommendation, choose how you would like to proceed, and submit your decisions when ready.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" data-print>Print / Save PDF</button>
+            <a class="btn btn-secondary" href="mailto:team@reddoorrents.com?subject=Question%20about%20Market%20Readiness%20Report">Ask Red Door a Question</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+    <nav class="report-nav" aria-label="Report sections">
+      <div class="container report-nav-inner">
+        <strong>Market Readiness Report</strong>
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#required-items">Required Items</a>
+          <a href="#recommendations">Recommendations</a>
+          <a href="#media">Media</a>
+          <a href="#owner-decisions">Owner Decisions</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="report-layout">
+      <div class="content-stack">
+        <section id="overview" class="section-panel">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">Executive Summary</div>
+              <h2>Several items should be addressed before marketing begins.</h2>
+              <p>Our review identified several items that should be addressed before marketing begins, along with additional work needed before resident occupancy. Completing the highest-priority items will improve presentation, reduce leasing friction, and help protect the property’s long-term condition.</p>
+            </div>
+          </div>
+          <div class="summary-grid" aria-label="Executive summary metrics">
+            <article class="summary-card"><span>Overall status</span><strong>Action Required</strong><small>Highest-priority work remains open.</small></article>
+            <article class="summary-card"><span>Required before marketing</span><strong>3 items</strong><small>Access, entry, and visible presentation.</small></article>
+            <article class="summary-card"><span>Required before move-in</span><strong>3 items</strong><small>Occupancy readiness and resident use.</small></article>
+            <article class="summary-card"><span>Recommended items</span><strong>2 items</strong><small>Marketability and preventive planning.</small></article>
+            <article class="summary-card"><span>Estimated required investment</span><strong>$1,090–$1,365</strong><small>Marketing and move-in requirements.</small></article>
+            <article class="summary-card"><span>Total estimated investment</span><strong>$1,515–$1,990</strong><small>All listed recommendations.</small></article>
+            <article class="summary-card"><span>Time to ready condition</span><strong>7–10 days</strong><small>Estimated business-day timeline.</small></article>
+            <article class="summary-card"><span>Prepared by</span><strong>Red Door</strong><small>Property Management team review.</small></article>
+          </div>
+          <p class="summary-note">Pricing ranges are preliminary planning estimates for this prototype. Final pricing and scheduling would be confirmed after owner authorization and scope review.</p>
+          <div class="readiness-track" aria-label="Readiness stage indicator">
+            <h3>Readiness stage</h3>
+            <div class="stage-line">
+              <span class="stage is-current">Action Required</span>
+              <span class="stage">Nearly Ready</span>
+              <span class="stage">Market-Ready</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="required-items" class="section-panel">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">Priority Summary</div>
+              <h2>Owner decision table</h2>
+              <p>Required items are separated from optional recommendations so the next decision is clear.</p>
+            </div>
+          </div>
+          <div class="filter-bar" aria-label="Recommendation filters">
+            <strong>Filter recommendations</strong>
+            <div class="filter-buttons" data-filter-group>
+              <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="filter-btn" type="button" data-filter="marketing" aria-pressed="false">Before Marketing</button>
+              <button class="filter-btn" type="button" data-filter="move-in" aria-pressed="false">Before Move-In</button>
+              <button class="filter-btn" type="button" data-filter="experience" aria-pressed="false">Marketability</button>
+              <button class="filter-btn" type="button" data-filter="capital" aria-pressed="false">Capital Planning</button>
+            </div>
+          </div>
+          <div class="table-wrap desktop-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Area</th>
+                  <th>Recommendation</th>
+                  <th>Priority</th>
+                  <th>Estimated Cost</th>
+                  <th>Why It Matters</th>
+                  <th>Owner Decision</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody data-summary-table></tbody>
+            </table>
+          </div>
+          <div class="mobile-card-list" data-mobile-table></div>
+        </section>
+
+        <section id="recommendations" class="section-panel">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">Detailed Recommendations</div>
+              <h2>Review each item and choose a path forward.</h2>
+              <p>Each card includes the finding, recommended action, estimated range, timing, and decision controls. The kitchen cabinet item is expanded as the default example.</p>
+            </div>
+          </div>
+          <div class="recommendation-list" data-recommendation-list></div>
+        </section>
+
+        <section id="media" class="section-panel">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">Walkthrough &amp; Supporting Evidence</div>
+              <h2>Media supports the market-readiness recommendations.</h2>
+              <p>These placeholders show where private walkthrough videos and photo documentation would appear in the owner report.</p>
+            </div>
+          </div>
+          <div class="media-grid">
+            <article class="video-placeholder" aria-label="Interior walkthrough video placeholder">
+              <div>
+                <span class="play-circle" aria-hidden="true">▶</span>
+                <h3>Interior Walkthrough</h3>
+                <p>Private video placeholder for room-by-room condition documentation.</p>
+              </div>
+            </article>
+            <article class="video-placeholder" aria-label="Exterior walkthrough video placeholder">
+              <div>
+                <span class="play-circle" aria-hidden="true">▶</span>
+                <h3>Exterior Walkthrough</h3>
+                <p>Private video placeholder for entry, yard, and exterior observations.</p>
+              </div>
+            </article>
+          </div>
+          <div class="gallery-grid" aria-label="Property photo gallery placeholders">
+            <div class="photo-placeholder" data-label="Entry and front door evidence"></div>
+            <div class="photo-placeholder" data-label="Kitchen cabinet detail"></div>
+            <div class="photo-placeholder" data-label="Window covering condition"></div>
+            <div class="photo-placeholder" data-label="Mechanical area overview"></div>
+          </div>
+          <p class="disclaimer-note">This assessment is a visual market-readiness review intended to support owner decisions. It is not a certified or formal home inspection.</p>
+        </section>
+
+        <section id="owner-decisions" class="section-panel">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">Next Steps</div>
+              <h2>From review to marketing preparation</h2>
+              <p>After decisions are submitted, Red Door would confirm scope, scheduling, and any formal authorization needed before work begins.</p>
+            </div>
+          </div>
+          <div class="steps">
+            <article class="step"><span>1</span><h3>Review recommendations</h3><p>Compare priority, timing, cost range, and impact.</p></article>
+            <article class="step"><span>2</span><h3>Submit decisions</h3><p>Approve coordination, self-complete, ask a question, or decline.</p></article>
+            <article class="step"><span>3</span><h3>Confirm scheduling</h3><p>Red Door confirms scope and timing for approved work.</p></article>
+            <article class="step"><span>4</span><h3>Prepare for marketing</h3><p>The property is readied for listing, showings, and move-in.</p></article>
+          </div>
+          <div class="cta-row" style="margin-top: 20px;">
+            <button class="btn btn-primary" type="button" data-submit>Submit My Decisions</button>
+            <a class="btn btn-secondary" href="mailto:team@reddoorrents.com?subject=Schedule%20a%20Market%20Readiness%20Review%20Call">Schedule a Review Call</a>
+          </div>
+        </section>
+
+        <details class="terms-panel">
+          <summary>Assessment Notes and Terms <span aria-hidden="true">+</span></summary>
+          <ul>
+            <li>This is a visual market-readiness assessment, not a formal home inspection.</li>
+            <li>Estimates may change if concealed or unforeseen conditions are discovered.</li>
+            <li>No work begins without owner authorization.</li>
+            <li>Approved work may require a separate scope of work or authorization agreement.</li>
+          </ul>
+          <p class="disclaimer-note">Design note: in a production workflow, a separate formal work authorization would be generated after the owner submits decisions.</p>
+        </details>
+      </div>
+
+      <aside class="side-panel" aria-label="Owner decision summary">
+        <section class="decision-summary">
+          <div class="section-kicker">Owner Decisions</div>
+          <h2>Decision summary</h2>
+          <div class="summary-counts">
+            <p>Approved items <strong data-count="approved">0</strong></p>
+            <p>Owner-completed items <strong data-count="owner">0</strong></p>
+            <p>Questions <strong data-count="question">0</strong></p>
+            <p>Declined items <strong data-count="declined">0</strong></p>
+            <p>Remaining decisions <strong data-count="pending">8</strong></p>
+          </div>
+          <div class="approved-total">
+            <span>Approved estimated total</span>
+            <strong data-approved-total>$0</strong>
+          </div>
+          <button class="btn btn-primary" type="button" data-submit>Review and Submit Decisions</button>
+          <p class="sidebar-note">Approval here means “approved for Red Door to coordinate” in this prototype. No data is submitted to a server.</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" data-modal aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <div>
+          <div class="section-kicker">Submission Preview</div>
+          <h2 id="modal-title">Review decisions before submitting</h2>
+        </div>
+        <button class="close-btn" type="button" data-close-modal aria-label="Close decision summary">×</button>
+      </div>
+      <div class="modal-body">
+        <p>This prototype summarizes the owner selections below. In production, this step could create a formal work authorization, notify Red Door, and write the decisions to the owner record.</p>
+        <div class="approved-total">
+          <span>Approved Red Door coordination total</span>
+          <strong data-modal-total>$0</strong>
+        </div>
+        <div class="modal-list" data-modal-list></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-close-modal>Keep Reviewing</button>
+        <button class="btn btn-primary" type="button" data-close-modal>Confirm Prototype Submission</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var recommendations = [
+        {
+          id: "doors-rekey",
+          area: "Exterior Doors",
+          title: "Rekey exterior locks",
+          priority: "Required Before Marketing",
+          priorityKey: "marketing",
+          cost: "$175–$225",
+          costLow: 175,
+          costHigh: 225,
+          time: "1 business day",
+          finding: "Exterior lock access should be reset before marketing so showings and vendor access can be coordinated cleanly.",
+          action: "Rekey exterior locks and confirm Red Door has working access for showing and preparation needs.",
+          why: "Secure, reliable access reduces leasing friction and prevents avoidable scheduling delays.",
+          defer: "Access issues can delay photos, showings, vendor coordination, and resident move-in preparation.",
+          evidence: "Exterior door and lock evidence"
+        },
+        {
+          id: "landscaping-entry",
+          area: "Landscaping",
+          title: "Trim overgrown shrubs and refresh entry",
+          priority: "Required Before Marketing",
+          priorityKey: "marketing",
+          cost: "$250–$350",
+          costLow: 250,
+          costHigh: 350,
+          time: "2–3 business days",
+          finding: "Shrubs around the entry are overgrown and reduce the home’s first impression from the street.",
+          action: "Trim shrubs, remove visible yard debris, edge the entry path, and refresh the approach before listing photos.",
+          why: "Curb appeal shapes online photos and the first few seconds of an in-person showing.",
+          defer: "The home may appear less cared for, which can reduce showing confidence and increase leasing friction.",
+          evidence: "Entry landscaping evidence"
+        },
+        {
+          id: "kitchen-hinge",
+          area: "Kitchen",
+          title: "Repair damaged cabinet hinge",
+          priority: "Required Before Marketing",
+          priorityKey: "marketing",
+          cost: "$75–$125",
+          costLow: 75,
+          costHigh: 125,
+          time: "1–2 business days",
+          finding: "The lower cabinet door does not close correctly because the hinge is bent and separating from the cabinet frame.",
+          action: "Replace the damaged hinge, reinforce the mounting area if needed, and adjust the cabinet door.",
+          why: "This is a visible presentation issue and could affect everyday resident use.",
+          defer: "A small visible repair may become a resident maintenance request and can make the kitchen feel less move-in ready.",
+          evidence: "Kitchen cabinet hinge evidence",
+          expanded: true
+        },
+        {
+          id: "smoke-detector",
+          area: "Safety",
+          title: "Install missing smoke detector",
+          priority: "Required Before Move-In",
+          priorityKey: "move-in",
+          cost: "$50–$85",
+          costLow: 50,
+          costHigh: 85,
+          time: "1 business day",
+          finding: "A smoke detector appears to be missing from one required location.",
+          action: "Install a smoke detector in the identified location and test operation before resident move-in.",
+          why: "Visible life-safety items should be addressed before occupancy.",
+          defer: "Move-in may be delayed until required safety items are corrected and documented.",
+          evidence: "Smoke detector location evidence"
+        },
+        {
+          id: "window-blinds",
+          area: "Windows",
+          title: "Replace damaged blinds",
+          priority: "Required Before Move-In",
+          priorityKey: "move-in",
+          cost: "$275–$350",
+          costLow: 275,
+          costHigh: 350,
+          time: "2–4 business days",
+          finding: "Several blinds are bent or damaged and do not present consistently throughout the home.",
+          action: "Replace damaged blinds with clean, consistent window coverings where needed.",
+          why: "Window coverings affect privacy, resident experience, and the property’s move-in presentation.",
+          defer: "Damaged coverings can create an immediate resident complaint and weaken the move-in experience.",
+          evidence: "Window blind condition evidence"
+        },
+        {
+          id: "move-in-cleaning",
+          area: "Cleaning",
+          title: "Professional move-in cleaning",
+          priority: "Required Before Move-In",
+          priorityKey: "move-in",
+          cost: "$265–$325",
+          costLow: 265,
+          costHigh: 325,
+          time: "1–2 business days",
+          finding: "The home would benefit from a final professional cleaning before resident occupancy.",
+          action: "Complete a professional move-in clean after repair work and before key handoff.",
+          why: "A clean home reduces resident friction and helps set the right standard at move-in.",
+          defer: "The first resident experience may be weaker and cleaning concerns may become early maintenance communication.",
+          evidence: "General cleaning evidence"
+        },
+        {
+          id: "hvac-service",
+          area: "HVAC",
+          title: "Clean and service HVAC system",
+          priority: "Preventive & Capital Planning",
+          priorityKey: "capital",
+          cost: "$125–$175",
+          costLow: 125,
+          costHigh: 175,
+          time: "2–5 business days",
+          finding: "The HVAC system should be cleaned and serviced as part of turnover planning.",
+          action: "Schedule HVAC cleaning/service and document filter condition, airflow, and system operation.",
+          why: "Preventive service can reduce avoidable service calls and supports long-term system care.",
+          defer: "Unaddressed maintenance may contribute to comfort complaints or more expensive service needs later.",
+          evidence: "HVAC equipment evidence"
+        },
+        {
+          id: "paint-touchups",
+          area: "Interior",
+          title: "Complete paint touch-ups",
+          priority: "Marketability & Resident Experience",
+          priorityKey: "experience",
+          cost: "$300–$425",
+          costLow: 300,
+          costHigh: 425,
+          time: "2–3 business days",
+          finding: "Scuffs and minor wall wear are visible in several areas.",
+          action: "Complete focused paint touch-ups in high-visibility areas before final photos or showings.",
+          why: "Fresh, clean walls improve listing presentation and can make the home feel better maintained.",
+          defer: "Cosmetic wear may stand out in photos or during showings and reduce perceived readiness.",
+          evidence: "Interior wall finish evidence"
+        }
+      ];
+
+      var decisions = recommendations.reduce(function (state, item) {
+        state[item.id] = "pending";
+        return state;
+      }, {});
+
+      var decisionLabels = {
+        pending: "Awaiting Decision",
+        approved: "Approved",
+        owner: "Owner Will Complete",
+        question: "Question",
+        declined: "Declined"
+      };
+
+      var decisionButtonLabels = {
+        approved: "Approve Red Door to Coordinate",
+        owner: "I Will Complete This",
+        question: "I Have a Question",
+        declined: "Decline Recommendation"
+      };
+
+      var priorityClass = {
+        marketing: "priority-marketing",
+        "move-in": "priority-move-in",
+        experience: "priority-experience",
+        capital: "priority-capital"
+      };
+
+      var activeFilter = "all";
+      var tableBody = document.querySelector("[data-summary-table]");
+      var mobileTable = document.querySelector("[data-mobile-table]");
+      var recommendationList = document.querySelector("[data-recommendation-list]");
+      var modal = document.querySelector("[data-modal]");
+      var modalList = document.querySelector("[data-modal-list]");
+      var lastFocused = null;
+      var printOpenStates = [];
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (char) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[char];
+        });
+      }
+
+      function formatRange(low, high) {
+        if (low === 0 && high === 0) return "$0";
+        if (low === high) return "$" + low.toLocaleString("en-US");
+        return "$" + low.toLocaleString("en-US") + "–$" + high.toLocaleString("en-US");
+      }
+
+      function badgeMarkup(item) {
+        return '<span class="priority-badge ' + priorityClass[item.priorityKey] + '">' + escapeHtml(item.priority) + '</span>';
+      }
+
+      function statusMarkup(value) {
+        return '<span class="decision-pill ' + (value === "pending" ? "" : value) + '">' + escapeHtml(decisionLabels[value]) + '</span>';
+      }
+
+      function renderSummaryTable() {
+        tableBody.innerHTML = recommendations.map(function (item) {
+          return '<tr data-item-row="' + item.id + '" data-priority="' + item.priorityKey + '">' +
+            '<td><strong>' + escapeHtml(item.area) + '</strong></td>' +
+            '<td>' + escapeHtml(item.title) + '</td>' +
+            '<td>' + badgeMarkup(item) + '</td>' +
+            '<td><strong>' + escapeHtml(item.cost) + '</strong></td>' +
+            '<td>' + escapeHtml(item.why) + '</td>' +
+            '<td data-table-decision="' + item.id + '">' + escapeHtml(decisionLabels[decisions[item.id]]) + '</td>' +
+            '<td data-table-status="' + item.id + '">' + statusMarkup(decisions[item.id]) + '</td>' +
+          '</tr>';
+        }).join("");
+
+        mobileTable.innerHTML = recommendations.map(function (item) {
+          return '<article class="mobile-table-card" data-mobile-row="' + item.id + '" data-priority="' + item.priorityKey + '">' +
+            '<div class="mobile-card-row"><span>Area</span><strong>' + escapeHtml(item.area) + '</strong></div>' +
+            '<div class="mobile-card-row"><span>Recommendation</span>' + escapeHtml(item.title) + '</div>' +
+            '<div class="mobile-card-row"><span>Priority</span>' + badgeMarkup(item) + '</div>' +
+            '<div class="mobile-card-row"><span>Estimated Cost</span><strong>' + escapeHtml(item.cost) + '</strong></div>' +
+            '<div class="mobile-card-row"><span>Why It Matters</span>' + escapeHtml(item.why) + '</div>' +
+            '<div class="mobile-card-row"><span>Owner Decision</span><strong data-mobile-decision="' + item.id + '">' + escapeHtml(decisionLabels[decisions[item.id]]) + '</strong></div>' +
+            '<div class="mobile-card-row"><span>Status</span><span data-mobile-status="' + item.id + '">' + statusMarkup(decisions[item.id]) + '</span></div>' +
+          '</article>';
+        }).join("");
+      }
+
+      function renderRecommendationCards() {
+        recommendationList.innerHTML = recommendations.map(function (item) {
+          return '<article class="recommendation-card" data-card="' + item.id + '" data-priority="' + item.priorityKey + '">' +
+            '<details ' + (item.expanded ? "open" : "") + '>' +
+              '<summary>' +
+                '<div>' +
+                  '<div class="card-title-line"><span>' + escapeHtml(item.area) + '</span>' + badgeMarkup(item) + '<span data-card-status="' + item.id + '">' + statusMarkup(decisions[item.id]) + '</span></div>' +
+                  '<h3>' + escapeHtml(item.title) + '</h3>' +
+                '</div>' +
+                '<span class="expand-indicator" aria-hidden="true">+</span>' +
+              '</summary>' +
+              '<div class="card-body">' +
+                '<div>' +
+                  '<div class="detail-grid">' +
+                    detailBox("Finding", item.finding) +
+                    detailBox("Recommended action", item.action) +
+                    detailBox("Why it matters", item.why) +
+                    detailBox("Possible impact of deferring", item.defer) +
+                    detailBox("Estimated cost", item.cost) +
+                    detailBox("Estimated completion", item.time) +
+                  '</div>' +
+                  '<div class="decision-controls" role="group" aria-label="Owner decision for ' + escapeHtml(item.title) + '">' +
+                    decisionButton(item.id, "approved") +
+                    decisionButton(item.id, "owner") +
+                    decisionButton(item.id, "question") +
+                    decisionButton(item.id, "declined") +
+                  '</div>' +
+                '</div>' +
+                '<aside class="evidence-panel">' +
+                  '<div class="photo-placeholder" data-label="' + escapeHtml(item.evidence) + '"></div>' +
+                  '<div class="coordination-note"><span aria-hidden="true">✓</span><span>Red Door can coordinate this item after owner authorization.</span></div>' +
+                '</aside>' +
+              '</div>' +
+            '</details>' +
+          '</article>';
+        }).join("");
+      }
+
+      function detailBox(title, copy) {
+        return '<div class="detail-box"><h4>' + escapeHtml(title) + '</h4><p>' + escapeHtml(copy) + '</p></div>';
+      }
+
+      function decisionButton(id, decision) {
+        return '<button class="decision-btn" type="button" data-decision="' + decision + '" data-id="' + id + '" aria-pressed="false">' + escapeHtml(decisionButtonLabels[decision]) + '</button>';
+      }
+
+      function setDecision(id, decision) {
+        decisions[id] = decisions[id] === decision ? "pending" : decision;
+        updateDecisionViews();
+      }
+
+      function updateDecisionViews() {
+        recommendations.forEach(function (item) {
+          var value = decisions[item.id];
+          document.querySelectorAll('[data-table-decision="' + item.id + '"]').forEach(function (node) {
+            node.textContent = decisionLabels[value];
+          });
+          document.querySelectorAll('[data-table-status="' + item.id + '"], [data-card-status="' + item.id + '"], [data-mobile-status="' + item.id + '"]').forEach(function (node) {
+            node.innerHTML = statusMarkup(value);
+          });
+          document.querySelectorAll('[data-mobile-decision="' + item.id + '"]').forEach(function (node) {
+            node.textContent = decisionLabels[value];
+          });
+          document.querySelectorAll('[data-id="' + item.id + '"]').forEach(function (button) {
+            button.setAttribute("aria-pressed", String(button.getAttribute("data-decision") === value));
+          });
+        });
+
+        var totals = getDecisionTotals();
+        document.querySelector('[data-count="approved"]').textContent = totals.approved;
+        document.querySelector('[data-count="owner"]').textContent = totals.owner;
+        document.querySelector('[data-count="question"]').textContent = totals.question;
+        document.querySelector('[data-count="declined"]').textContent = totals.declined;
+        document.querySelector('[data-count="pending"]').textContent = totals.pending;
+        document.querySelector("[data-approved-total]").textContent = formatRange(totals.approvedLow, totals.approvedHigh);
+        applyFilter();
+      }
+
+      function getDecisionTotals() {
+        return recommendations.reduce(function (totals, item) {
+          var value = decisions[item.id];
+          totals[value] += 1;
+          if (value === "approved") {
+            totals.approvedLow += item.costLow;
+            totals.approvedHigh += item.costHigh;
+          }
+          return totals;
+        }, { approved: 0, owner: 0, question: 0, declined: 0, pending: 0, approvedLow: 0, approvedHigh: 0 });
+      }
+
+      function applyFilter() {
+        var selector = '[data-priority]';
+        document.querySelectorAll(selector).forEach(function (node) {
+          node.hidden = activeFilter !== "all" && node.getAttribute("data-priority") !== activeFilter;
+        });
+      }
+
+      function openModal() {
+        var totals = getDecisionTotals();
+        lastFocused = document.activeElement;
+        document.querySelector("[data-modal-total]").textContent = formatRange(totals.approvedLow, totals.approvedHigh);
+        modalList.innerHTML = recommendations.map(function (item) {
+          return '<article class="modal-item">' +
+            '<div><strong>' + escapeHtml(item.area + " — " + item.title) + '</strong><br><span>' + escapeHtml(item.cost) + '</span></div>' +
+            statusMarkup(decisions[item.id]) +
+          '</article>';
+        }).join("");
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        modal.querySelector("[data-close-modal]").focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        if (lastFocused) lastFocused.focus();
+      }
+
+      renderSummaryTable();
+      renderRecommendationCards();
+      updateDecisionViews();
+
+      document.addEventListener("click", function (event) {
+        var printButton = event.target.closest("[data-print]");
+        if (printButton) {
+          window.print();
+          return;
+        }
+
+        var decisionButtonNode = event.target.closest("[data-decision]");
+        if (decisionButtonNode) {
+          setDecision(decisionButtonNode.getAttribute("data-id"), decisionButtonNode.getAttribute("data-decision"));
+          return;
+        }
+
+        var filterButton = event.target.closest("[data-filter]");
+        if (filterButton) {
+          activeFilter = filterButton.getAttribute("data-filter");
+          document.querySelectorAll("[data-filter]").forEach(function (button) {
+            button.setAttribute("aria-pressed", String(button === filterButton));
+          });
+          applyFilter();
+          return;
+        }
+
+        if (event.target.closest("[data-submit]")) {
+          openModal();
+          return;
+        }
+
+        if (event.target.closest("[data-close-modal]") || event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener("beforeprint", function () {
+        printOpenStates = Array.from(document.querySelectorAll(".recommendation-card details")).map(function (detail) {
+          return detail.open;
+        });
+        document.querySelectorAll(".recommendation-card details").forEach(function (detail) {
+          detail.open = true;
+        });
+      });
+
+      window.addEventListener("afterprint", function () {
+        document.querySelectorAll(".recommendation-card details").forEach(function (detail, index) {
+          detail.open = printOpenStates[index];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
